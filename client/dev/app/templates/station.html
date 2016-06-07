@@ -1,4 +1,46 @@
 <div class="container">
+<div class="row">
+  <div class="col-xs-12">
+    <h4>Create a New Favorite Location:</h4>
+    <form ng-submit="station.createLocation(station.newLocation)">
+      <div class="form-group">
+        <label for="" class="control-label">Name of Location</label>
+        <input type="text" class="form-control" ng-model="station.newLocation.locationName" required>
+      </div>
+      <div class="form-group">
+        <label for="" class="control-label">Latitude (-80 to 80)</label>
+        <input type="text" class="form-control" ng-model="station.newLocation.latitude" required>
+      </div>
+      <div class="form-group">
+        <label for="" class="control-label">Longitude (-180 to 180)</label>
+        <input type="text" class="form-control"  ng-model="station.newLocation.longitude" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
 
-  test
+  <div class="row">
+    <div class="col-xs-12">
+      Your Favorite Locations:
+      <ul>
+        <li ng-repeat="location in station.locations">{{location.locationName}}</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <p>The next pass times for this location are: </p>
+      <ul>
+        <li ng-repeat="ime in station.results"></li>
+      </ul>
+    </div>
+    
+  </div>
+
+
+</div>
+  
+
+  
 </div>

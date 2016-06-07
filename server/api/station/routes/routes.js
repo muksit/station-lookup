@@ -10,7 +10,7 @@ module.exports = class stationRoutes {
 	        .post(StationController.createLocation);
 
 	    router
-	        .route('/api/locations/:id')
+	        .route('/api/station/locations/:id')
 	        .delete(StationController.deleteLocation);
 	}
     
