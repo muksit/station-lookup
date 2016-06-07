@@ -5,7 +5,7 @@
     .factory('StationResource', [
       '$resource',
       function($resource) {
-        var _url = '';
+        var _url = '/api/station/locations/:id';
         var _params = {};
         var _methods = {};
 

@@ -19,4 +19,4 @@ module.exports = class RouteConfig {
         application.use(contentLength.validateMax({max: 999}));
         application.use(helmet());
     }
-}
+};
