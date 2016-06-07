@@ -1,0 +1,7 @@
+.DS_Store
+.idea
+coverage
+node_modules
+unit_coverage
+bower_components
+typings
