@@ -12,6 +12,10 @@ module.exports = class stationRoutes {
 	    router
 	        .route('/api/station/locations/:id')
 	        .delete(StationController.deleteLocation);
+
+	    router
+	    	.route('/api/station/nextPass/:lat/:long')
+	    	.get(StationController.getNextPass);
 	}
     
 }

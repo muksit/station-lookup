@@ -19,41 +19,49 @@ angular.module('space-station-tracking.main', [
     }
   });
 })
-.controller('StationController', function($scope, $http, data, locationService){
-  /*$http.get('api/station/locations')
-    .success(function(data){
-      $scope.expenses = data;
-      console.log(data);
-    })
-    .error(function(data) {
-      console.log('Error: ' + data);
-    });*/
-
+.controller('StationController', function($scope, $filter, $http, data, 
+  locationService){
 
   var vm = this;
   var service = locationService;
 
   _.extend(vm, {
 
+    nextTimes : [],
+
     locations: data.favoritesList,
 
     getAllLocations: function(){
       vm.locations = service.query();
-      console.log(vm.locations);
     },
 
-    getNextPasses: function(){
-      //query the api to get next pass for a certain place
+    getNextPass: function(location){
+      var config = {};
+      config.method = 'GET';
+      config.url = 'api/station/nextPass/' + $filter('number')(location.latitude, 1) +
+      '/' + $filter('number')(location.longitude, 1);
+
+      $http(config).then(function(response){
+        if (response.status !== 200){
+          vm.error = 'Sorry, your request could not be processed';
+        } else {
+          vm.error = '';
+          vm.nextTimes = response.data.response;
+        }
+      }, function(error){
+        console.log(error);
+      });
+
     },
 
     createLocation: function(data){
+      console.log(data);
       service.save(data)
         .$promise.then(function(resp){
-          console.log('resp is ' + resp);
           vm.newLocation = {};
           vm.refresh();
         }, function(error){
-          console.log('error is ' + error);
+          console.log(error);
         });
     },
 

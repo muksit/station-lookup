@@ -1,0 +1,39 @@
+html{
+	height: 100%;
+}
+body{
+	margin-top:100px;
+	height: 100%;
+	font-family: 'Oxygen', sans-serif;
+	color: white;
+	background: url('background.png') no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;	
+}
+.main-container{
+	padding-top:100px;
+}
+.btn{
+	border-radius: 0px;
+	background-color:black;
+	color:white;
+}
+
+.panel{
+	color:black;
+	border-radius: 0px;
+}
+
+.pass-time{
+	font-size:36px;
+}
+
+.favorite {
+	color:black;
+	background-color:white;
+}
+li {
+	list-style: none;
+}

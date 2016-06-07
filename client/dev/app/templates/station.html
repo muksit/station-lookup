@@ -1,46 +1,84 @@
-<div class="container">
-<div class="row">
-  <div class="col-xs-12">
-    <h4>Create a New Favorite Location:</h4>
-    <form ng-submit="station.createLocation(station.newLocation)">
-      <div class="form-group">
-        <label for="" class="control-label">Name of Location</label>
-        <input type="text" class="form-control" ng-model="station.newLocation.locationName" required>
-      </div>
-      <div class="form-group">
-        <label for="" class="control-label">Latitude (-80 to 80)</label>
-        <input type="text" class="form-control" ng-model="station.newLocation.latitude" required>
-      </div>
-      <div class="form-group">
-        <label for="" class="control-label">Longitude (-180 to 180)</label>
-        <input type="text" class="form-control"  ng-model="station.newLocation.longitude" required>
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-  </div>
-
-  <div class="row">
-    <div class="col-xs-12">
-      Your Favorite Locations:
-      <ul>
-        <li ng-repeat="location in station.locations">{{location.locationName}}</li>
-      </ul>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <h1>Space Station Lookup</h1>
     </div>
   </div>
+</nav>
 
+<div class="container-fluid main-container">
   <div class="row">
-    <div class="col-xs-12">
-      <p>The next pass times for this location are: </p>
-      <ul>
-        <li ng-repeat="ime in station.results"></li>
-      </ul>
+    <div class="col-sm-3">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            Look up the next flyby for a location
+          </h4>
+        </div>
+        <div class="panel-body">
+          <form ng-submit="station.getNextPass(station.lookup)">
+            <div class="form-group">
+              <label for="" class="control-label">Latitude (-80 to 80)</label>
+              <input type="number" min="-80" max="80" class="form-control" ng-model="station.lookup.latitude" required>
+            </div>
+            <div class="form-group">
+              <label for="" class="control-label">Longitude (-180 to 180)</label>
+              <input type="number" min="-180" max="180" class="form-control"  ng-model="station.lookup.longitude" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
     </div>
-    
+    <div class="col-sm-5">
+      <div class="panel panel-default" ng-if="station.error || station.nextTimes.length > 1">
+        <div class="panel-body">
+          <p>{{station.error}}</p>
+          <p>The next pass times for this location are: </p>
+          <ul>
+            <li class="pass-time" ng-repeat="time in station.nextTimes">{{time.risetime*1000 | date : 'medium': 'EST'}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
-
-
-</div>
-  
-
-  
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="panel panel-default" >
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            Create a New Favorite Location:
+          </h4>
+        </div>
+        <div class="panel-body">
+          <form ng-submit="station.createLocation(station.newLocation)">
+            <div class="form-group">
+              <label for="" class="control-label">Name of Location</label>
+              <input type="text" class="form-control" ng-model="station.newLocation.locationName" required>
+            </div>
+            <div class="form-group">
+              <label for="" class="control-label">Latitude (-80 to 80)</label>
+              <input type="number" min="-80" max="80" class="form-control" ng-model="station.newLocation.latitude" required>
+            </div>
+            <div class="form-group">
+              <label for="" class="control-label">Longitude (-180 to 180)</label>
+              <input type="number" min="-180" max="180" class="form-control"  ng-model="station.newLocation.longitude" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+      
+    </div>
+    <div class="col-sm-9" ng-if="station.locations">
+      <label>Your Favorite Locations:</label><br>
+      <div class="btn-group" ng-model="button.radio" bs-radio-group>
+        <label class="btn btn-default favorite" ng-repeat="location in station.locations" ng-click="station.getNextPass(location)">
+          <input type="radio" class="btn btn-default" value="{{$index}}"> 
+          {{location.locationName}}
+        </label>
+      </div>
+      
+    </div>
+  </div>
 </div>

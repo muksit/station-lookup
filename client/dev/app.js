@@ -9,16 +9,3 @@ var stationTracking = angular.module('space-station-tracking', [
 stationTracking.config(function($urlRouterProvider){
 	$urlRouterProvider.otherwise('/');
 });
-
-/*;(function(ng) {
-  'use strict';
-
-  ng.module('space-station-tracking', [
-      'ngResource',
-      'ngRoute',
-      'ngMessages',
-      'ui-router',
-      'mgcrea.ngStrap'
-    ]);
-}(window.angular));
-*/
